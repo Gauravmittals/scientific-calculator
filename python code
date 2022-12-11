@@ -1,0 +1,35 @@
+import math
+def calc(term):
+    term = term.replace(' ','')
+    term = term.replace('^','**')
+    term = term.replace('=','')
+    term = term.replace('?','')
+    term = term.replace('%','/100')
+    term = term.replace('rad','radians')
+    term = term.replace('mod','%')
+    functions = ['sin','cos','tan','cosh','sinh','tanh','sqrt','pi','radians','e']
+    
+    term = term.lower()
+    for function in functions:
+        if function in term:
+            withmath = 'math.' + function
+            term = term.replace(function,withmath)
+    try:
+        term = eval(term)
+    except ZeroDivisionError:
+        print("Cant divide by zero,please try again")
+    except NameError:
+        print('Invalid input,please try again')
+    except AttributeError:
+        print("Please check usage method and try again")
+    return term
+def result(term):
+    print("\n" + str(calc(term))) 
+def main():
+    while True:
+        print("\n Welcome to scientific calculator !! Input in any format:enter quit to exit")
+        k = input("\n What is ?")
+        if k == 'quit':
+            break
+        result(k)
+main()
